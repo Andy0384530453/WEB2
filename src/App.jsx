@@ -72,14 +72,14 @@ const filteredPokemons = pokemons.filter(pokemon =>
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 p-6">
-      <h1 className="text-5xl font-extrabold text-center text-indigo-800 mb-12 tracking-tight">
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-950 via-purple-500 to-pink-500 p-6">
+      <h1 className="text-5xl font-extrabold text-center text-white mb-12 tracking-tight">
         Pokedex
       </h1>
 
 {selectedPokemon && (
         <div
-          className="mb-10 fixed bg-white rounded-2xl shadow-2xl w-full border border-gray-100 "
+          className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-2xl h-[700px] w-[800px] border border-gray-100 "
           style={{ opacity: 1, transform: "translateY(0)" }}
         >
           <button
@@ -165,7 +165,7 @@ const filteredPokemons = pokemons.filter(pokemon =>
   />
 </div>
 
-<div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+<div className="mt-4 grid grid-cols-3 gap-8">
   {filteredPokemons.map((pokemon) => ( 
     <div
       key={pokemon.id}
@@ -178,7 +178,7 @@ const filteredPokemons = pokemons.filter(pokemon =>
         className="w-28 h-28 mx-auto rounded-full bg-gray-50 p-3"
       />
       <h2 className="text-xl font-semibold capitalize mt-4 text-indigo-700">{pokemon.name}</h2>
-      <p className="text-sm text-gray-500">#{String(pokemon.id).padStart(3, "0")}</p>
+      <p className="text-sm text-gray-500"></p>
     </div>
   ))}
 </div>
@@ -192,29 +192,6 @@ const filteredPokemons = pokemons.filter(pokemon =>
 
       {loading && <div className="text-center text-2xl text-gray-600">Chargement...</div>}
       {error && <div className="text-center text-red-500">{error}</div>}
-
-
-      <div className="z-50 mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {pokemons.map((pokemon) => (
-          <div
-            key={pokemon.id}
-            className="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer border border-gray-100"
-            onClick={() => setSelectedPokemon(pokemon)}
-            style={{ transition: "all 0.3s ease" }}
-          >
-            <img
-              src={
-                pokemon.sprites.other["official-artwork"].front_default ||
-                pokemon.sprites.front_default
-              }
-              alt={pokemon.name}
-              className="w-28 h-28 mx-auto rounded-full bg-gray-50 p-3"
-            />
-            <h2 className="text-xl font-semibold capitalize mt-4 text-indigo-700">{pokemon.name}</h2>
-            <p className="text-sm text-gray-500">#{String(pokemon.id).padStart(3, "0")}</p>
-          </div>
-        ))}
-      </div>
 
     </div>
   );
