@@ -18,7 +18,7 @@ const filteredPokemons = pokemons.filter(pokemon =>
         setError(null);
 
         const urls = [];
-        for (let i = 1; i <= 40; i++) {
+        for (let i = 1; i <=20; i++) {
           urls.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
         }
 
@@ -77,72 +77,9 @@ const filteredPokemons = pokemons.filter(pokemon =>
         Pokedex
       </h1>
 
-
-<div className="max-w-md mx-auto mb-8">
-  <input
-    type="search"
-    placeholder="Search Pokémon"
-    className="w-full p-4 rounded-full text-xl bg-white "
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-  />
-</div>
-
-<div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-  {filteredPokemons.map((pokemon) => ( 
-    <div
-      key={pokemon.id}
-      className="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer border border-gray-100"
-      onClick={() => setSelectedPokemon(pokemon)}
-    >
-      <img
-        src={pokemon.sprites.other["official-artwork"].front_default || pokemon.sprites.front_default}
-        alt={pokemon.name}
-        className="w-28 h-28 mx-auto rounded-full bg-gray-50 p-3"
-      />
-      <h2 className="text-xl font-semibold capitalize mt-4 text-indigo-700">{pokemon.name}</h2>
-      <p className="text-sm text-gray-500">#{String(pokemon.id).padStart(3, "0")}</p>
-    </div>
-  ))}
-</div>
-
-{searchTerm && filteredPokemons.length === 0 && !loading && (
-  <div className="text-center text-gray-500 mt-8">
-    Aucun Pokémon trouvé pour "{searchTerm}"
-  </div>
-)}
-
-
-      
-
-      {loading && <div className="text-center text-2xl text-gray-600">Chargement...</div>}
-      {error && <div className="text-center text-red-500">{error}</div>}
-
-      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {pokemons.map((pokemon) => (
-          <div
-            key={pokemon.id}
-            className="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer border border-gray-100"
-            onClick={() => setSelectedPokemon(pokemon)}
-            style={{ transition: "all 0.3s ease" }}
-          >
-            <img
-              src={
-                pokemon.sprites.other["official-artwork"].front_default ||
-                pokemon.sprites.front_default
-              }
-              alt={pokemon.name}
-              className="w-28 h-28 mx-auto rounded-full bg-gray-50 p-3"
-            />
-            <h2 className="text-xl font-semibold capitalize mt-4 text-indigo-700">{pokemon.name}</h2>
-            <p className="text-sm text-gray-500">#{String(pokemon.id).padStart(3, "0")}</p>
-          </div>
-        ))}
-      </div>
-
-      {selectedPokemon && (
+{selectedPokemon && (
         <div
-          className="mt-12 p-8 bg-white rounded-2xl shadow-2xl max-w-3xl mx-auto relative border border-gray-100 transition:1s"
+          className="mb-10 fixed bg-white rounded-2xl shadow-2xl w-full border border-gray-100 "
           style={{ opacity: 1, transform: "translateY(0)" }}
         >
           <button
@@ -216,6 +153,69 @@ const filteredPokemons = pokemons.filter(pokemon =>
           </div>
         </div>
       )}
+
+
+<div className="">
+  <input
+    type="search"
+    placeholder="Search Pokémon"
+    className="w-full p-4 rounded-full text-xl bg-white "
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+  />
+</div>
+
+<div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+  {filteredPokemons.map((pokemon) => ( 
+    <div
+      key={pokemon.id}
+      className="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer border border-gray-100"
+      onClick={() => setSelectedPokemon(pokemon)}
+    >
+      <img
+        src={pokemon.sprites.other["official-artwork"].front_default || pokemon.sprites.front_default}
+        alt={pokemon.name}
+        className="w-28 h-28 mx-auto rounded-full bg-gray-50 p-3"
+      />
+      <h2 className="text-xl font-semibold capitalize mt-4 text-indigo-700">{pokemon.name}</h2>
+      <p className="text-sm text-gray-500">#{String(pokemon.id).padStart(3, "0")}</p>
+    </div>
+  ))}
+</div>
+
+{searchTerm && filteredPokemons.length === 0 && !loading && (
+  <div className="text-center text-gray-500 mt-8">
+    Aucun Pokémon trouvé pour "{searchTerm}"
+  </div>
+)}
+      
+
+      {loading && <div className="text-center text-2xl text-gray-600">Chargement...</div>}
+      {error && <div className="text-center text-red-500">{error}</div>}
+
+
+      <div className="z-50 mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {pokemons.map((pokemon) => (
+          <div
+            key={pokemon.id}
+            className="bg-white rounded-2xl shadow-lg p-6 text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer border border-gray-100"
+            onClick={() => setSelectedPokemon(pokemon)}
+            style={{ transition: "all 0.3s ease" }}
+          >
+            <img
+              src={
+                pokemon.sprites.other["official-artwork"].front_default ||
+                pokemon.sprites.front_default
+              }
+              alt={pokemon.name}
+              className="w-28 h-28 mx-auto rounded-full bg-gray-50 p-3"
+            />
+            <h2 className="text-xl font-semibold capitalize mt-4 text-indigo-700">{pokemon.name}</h2>
+            <p className="text-sm text-gray-500">#{String(pokemon.id).padStart(3, "0")}</p>
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 }
